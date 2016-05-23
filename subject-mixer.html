@@ -73,21 +73,6 @@
 		return false;
 	}
 		
-	/* Code to generate the elements that would go in the table */
-	
-	var random_sequence = generate_random_sequence(subjects);
-	var timetable = [[random_sequence, ]];
-	
-	var change_up = Math.floor(Math.random() * 10); // Change up sequence at a random count
-	
-	for(var i = 0; i < 11; i++) {
-		random_sequence = spin_sequence_randomly(random_sequence);	
-		if(i == change_up) {
-			random_sequence = generate_random_sequence(random_sequence);
-		}
-		timetable.push(random_sequence);
-		console.log(timetable[i] + ", i = " + i);
-	}
 	
     </script>
     
@@ -114,8 +99,45 @@
 	
 	<script>
 	// Generate a table
-	</script>
 	
+	/* Code to generate the elements that would go in the table */
+	var num_students = 40;
+	var random_sequence = generate_random_sequence(subjects);
+	var timetable = new Array(new Array(5)); // Create an array of arrays
+	var ttstring = new Array();
+	var change_up = Math.floor(Math.random() * 10); // Change up sequence at a random count
+	
+	for(var i = 0; i < num_students; i++) {
+		random_sequence = spin_sequence_randomly(random_sequence);	
+		if(i == change_up) {
+			temp = generate_random_sequence(random_sequence);
+			if(isCollision(temp, random_sequence))
+				random_sequence = spin_sequence_randomly(temp);			
+		}
+		ttstring.push(random_sequence.join());
+	}
+	
+	
+	for(var i = 1; i < num_students; i++) {
+		console.log(ttstring[i]);
+		document.write("<tr>");
+		document.write("<td class=\"text-center text-information\" id=\"r"+i + "\">" + i + "</td>");
+		
+		for(var j = 1;j < 6; j++) {
+			document.write("<td class=\"text-center text-information\" id=\"r"+i + "d"+j +"\">");	
+			
+			// This is to bypass an issue where, if I save the sequences to an array, it doesn't quite persist
+			var subject = ttstring[i -1].split(',');
+			subject = subject[j - 1];
+			document.write(subject);
+			
+			document.write("</td>")
+		}
+		document.write("</tr>");
+	}
+	</script>
+	<!-- 
+	Format of how each table row would look
 	<tr>
 		<td class="text-center text-information" id="r1"></td>
 		<td class="text-center text-information" id="r1d1"></td>
@@ -124,15 +146,7 @@
 		<td class="text-center text-information" id="r1d4"></td>
 		<td class="text-center text-information" id="r1d5"></td>
 	</tr>
-	
-	<tr>
-		<td class="text-center text-information" id="r2"></td>
-		<td class="text-center text-information" id="r2d1"></td>
-		<td class="text-center text-information" id="r2d2"></td>
-		<td class="text-center text-information" id="r2d3"></td>
-		<td class="text-center text-information" id="r2d4"></td>
-		<td class="text-center text-information" id="r2d5"></td>
-	</tr>
+	-->
 	
 	
 	</tbody>
