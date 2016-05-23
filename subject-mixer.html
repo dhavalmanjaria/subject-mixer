@@ -26,11 +26,16 @@
 	return: Array	
 	*/
 	function spin_sequence_randomly(arr) {
-	    for(var i = 0; i < Math.floor(Math.random() * 10); i++) {
-		var elem = arr.shift();
-		arr.push(elem)
-	    }
-	    return arr;
+		// Ensures that the array is shifted at least once.
+		var  i = 0;
+		do {
+			var elem = arr.shift();
+			arr.push(elem)
+			
+			i++;
+		} while(i < Math.floor(Math.random() * arr.length));
+		
+		return arr;
 	}
 	
 	/**
@@ -56,8 +61,10 @@
 	return: boolean
 	*/
 	function isCollision(arr1, arr2) {
-		if(!(arr1.length == arr2.length))
+		if(!(arr1.length == arr2.length)) {
+			console.log("collision detected");
 			return false;
+		}
 		
 		for(var i = 0; i < arr1.length; i++) {
 			if(arr1[i] == arr2[i])
@@ -67,17 +74,19 @@
 	}
 		
 	/* Code to generate the elements that would go in the table */
-	var timetable = [[]];
+	
 	var random_sequence = generate_random_sequence(subjects);
+	var timetable = [[random_sequence, ]];
+	
+	var change_up = Math.floor(Math.random() * 10); // Change up sequence at a random count
+	
 	for(var i = 0; i < 11; i++) {
-		random_sequence = spin_sequence_randomly(random_sequence);
-		if (i % 5 == 0) {
-			temp_sequence = generate_random_sequence(subjects);
-			if(isCollision(random_sequence, temp_sequence)) 
-				random_sequence = spin_sequence_randomly(temp_sequence);
+		random_sequence = spin_sequence_randomly(random_sequence);	
+		if(i == change_up) {
+			random_sequence = generate_random_sequence(random_sequence);
 		}
 		timetable.push(random_sequence);
-		console.log(timetable[i]);
+		console.log(timetable[i] + ", i = " + i);
 	}
 	
     </script>
