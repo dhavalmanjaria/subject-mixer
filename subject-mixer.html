@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Subject Mixer v0.2</title>
+	<meta charset="UTF-8" />
+	
+	<!-- bootstrap stuff -->
+	<meta name="viewport" content="width=device-width, initial-scale = 1" />
+	 <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+    </head>
+    <script>
+	var subjects = ["PPM", "SSAD", "OS", "CS", "AWD"];
+
+	/**
+	Array spin_sequence_randomly(Array)
+	brief: Function "spins" an array, i.e removes the last element and puts it in first place some random number of times, so that the array rotates, like a wheel
+	param: Array
+	return: Array	
+	*/
+	function spin_sequence_randomly(arr) {
+	    for(var i = 0; i < Math.floor(Math.random() * 10); i++) {
+		var elem = arr.shift();
+		arr.push(elem)
+	    }
+	    return arr;
+	}
+	
+	/**
+	Array generate_random_sequence(Array)
+	brief: Generates a random sequence of elements in an array. This is called the Fisher-Yates / Durstenfeld shuffle.
+	param: Array
+	return: Array
+	*/
+	function generate_random_sequence(arr) { 
+		for(var i = 0; i < arr.length; i++) {
+			var  j = Math.floor(Math.random() * (i + 1));
+			var temp = arr[j];
+			arr[j] = arr[i];
+			arr[i] = temp;
+		}
+		return arr;
+	}
+	
+	/**
+	boolean isCollision(Array, Array)
+	brief: Checks if an element in two arrays has the same position.
+	param: Array, Array
+	return: boolean
+	*/
+	function isCollision(arr1, arr2) {
+		if(!(arr1.length == arr2.length))
+			return false;
+		
+		for(var i = 0; i < arr1.length; i++) {
+			if(arr1[i] == arr2[i])
+				return true;
+		}
+		return false;
+	}
+		
+	/* Code to generate the elements that would go in the table */
+	var timetable = [[]];
+	var random_sequence = generate_random_sequence(subjects);
+	for(var i = 0; i < 11; i++) {
+		random_sequence = spin_sequence_randomly(random_sequence);
+		if (i % 5 == 0) {
+			temp_sequence = generate_random_sequence(subjects);
+			if(isCollision(random_sequence, temp_sequence)) 
+				random_sequence = spin_sequence_randomly(temp_sequence);
+		}
+		timetable.push(random_sequence);
+		console.log(timetable[i]);
+	}
+	
+    </script>
+    
+    <body>
+    <div class="container">
+    <table class="table table-bordered table-striped table-hover">
+	<thead>
+		<tr>
+			<td colspan="6" class="bg-primary text-center text-primary">TIME TABLE</td>
+		</tr>
+	<tr class="bg-info">
+	<!-- Headings-->
+		<th class="text-center">Roll No.</th>
+		<th class="text-center">Day 1</th>
+		<th class="text-center">Day 2</th>
+		<th class="text-center">Day 3</th>
+		<th class="text-center">Day 4</th>
+		<th class="text-center">Day 5</th>
+	</tr>
+	
+	</thead>
+	
+	<tbody>
+	
+	<script>
+	// Generate a table
+	</script>
+	
+	<tr>
+		<td class="text-center text-information" id="r1"></td>
+		<td class="text-center text-information" id="r1d1"></td>
+		<td class="text-center text-information" id="r1d2"></td>
+		<td class="text-center text-information" id="r1d3"></td>
+		<td class="text-center text-information" id="r1d4"></td>
+		<td class="text-center text-information" id="r1d5"></td>
+	</tr>
+	
+	<tr>
+		<td class="text-center text-information" id="r2"></td>
+		<td class="text-center text-information" id="r2d1"></td>
+		<td class="text-center text-information" id="r2d2"></td>
+		<td class="text-center text-information" id="r2d3"></td>
+		<td class="text-center text-information" id="r2d4"></td>
+		<td class="text-center text-information" id="r2d5"></td>
+	</tr>
+	
+	
+	</tbody>
+    </table>
+    </div>
+    </body>
+</html>
+	
