@@ -17,6 +17,7 @@
 	
     </head>
     <script>
+    // Edit this array to set subjects
 	var subjects = ["Sub1", "Sub2", "Sub3", "Sub4", "Sub5"];
 
 	/**
@@ -80,17 +81,24 @@
     <div class="container">
     <table class="table table-bordered table-striped table-hover">
 	<thead>
-		<tr>
-			<td colspan="6" class="bg-primary text-center text-primary">TIME TABLE</td>
+		<tr id="table-title">
+			<script>
+			// Lenght + 1 to accomodate roll no.
+				document.write("<td colspan="+subjects.length + 1 +" class='bg-primary text-center text-primary'>TIME TABLE</td>");
+			</script>
 		</tr>
 	<tr class="bg-info">
 	<!-- Headings-->
 		<th class="text-center">Roll No.</th>
-		<th class="text-center">Day 1</th>
+		<!-- <th class="text-center">Day 1</th>
 		<th class="text-center">Day 2</th>
 		<th class="text-center">Day 3</th>
 		<th class="text-center">Day 4</th>
-		<th class="text-center">Day 5</th>
+		<th class="text-center">Day 5</th> -->
+		<script type="text/javascript">
+			for(var i = 1; i <= subjects.length; i++)
+				document.write("<th class='text-center'>Day "+i+"</th>");
+		</script>
 	</tr>
 	
 	</thead>
@@ -123,7 +131,7 @@
 		document.write("<tr>");
 		document.write("<td class=\"text-center text-information\" id=\"r"+i + "\">" + i + "</td>");
 		
-		for(var j = 1;j < 6; j++) {
+		for(var j = 1;j <= subjects.length; j++) {
 			document.write("<td class=\"text-center text-information\" id=\"r"+i + "d"+j +"\">");	
 			
 			// This is to bypass an issue where, if I save the sequences to an array, it doesn't quite persist
