@@ -18,7 +18,10 @@
     </head>
     <script>
     // Edit this array to set subjects
-	var subjects = ["Sub1", "Sub2", "Sub3", "Sub4", "Sub5"];
+	var subjects = ["VB", "C++", "ECOMM", "DBMS"];
+
+	// Change this to set number of students
+	var num_students = 40;
 
 	/**
 	Array spin_sequence_randomly(Array)
@@ -109,7 +112,6 @@
 	// Generate a table
 	
 	/* Code to generate the elements that would go in the table */
-	var num_students = 40;
 	var random_sequence = generate_random_sequence(subjects);
 	var timetable = new Array(new Array(5)); // Create an array of arrays
 	var ttstring = new Array();
