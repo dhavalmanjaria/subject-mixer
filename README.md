@@ -7,3 +7,8 @@ This little project stemmed from a situation where students could give any exam 
 
 The reason this is all in one simple HTML file and not in a more elegant structure is because this project initially needed to be developed and deployed as quickly as possible. This is designed so that the user can deploy this on phone or on any PC in a trivial amount of time.  Since this app *generates* data but does not store or modify it, it is possible to do this.
 
+## Usage:
+Change num_students variable to set number of students
+Change subjects array to set subjects
+
+If it matches, simply refresh the page
